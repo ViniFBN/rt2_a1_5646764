@@ -33,6 +33,7 @@ done by **Vinícius Ferreira (S5646764)**.
 
 The documentation itself is about the codes designed for the final assignment on Research
 Track 1, adding comments and explanation about the nodes on the custom package :mod:`vinicius_assignment_2_rt1`.
+The codes are separated in further sections, which can be explored when clicking on the desired module.
 
 Modules
 =======
