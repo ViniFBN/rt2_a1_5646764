@@ -1,3 +1,21 @@
+.. Reminder about commiting the changes and all that
+   1. make changes on the file itself (node_a and so on) inside main branch and do:
+      on vscode (inside src/docs/):
+         doxygen Doxyfile && make html
+
+      on terminal (or just use github desktop):
+         git init
+         git branch
+         git add .
+         git commit -m "message"
+         git push -u origin main
+   
+   2. send the differences to the gh-pages branch:
+      on terminal running on src/:
+         git init
+         git subtree push --prefix docs/_build/html/ origin gh-pages
+
+
 Welcome to S5646764_rt2_a1's documentation!
 ###########################################
 
