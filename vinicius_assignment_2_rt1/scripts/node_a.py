@@ -63,6 +63,10 @@ def clbk_odom(msg):
     pub.publish(msg_custom)
     
 def stp_robot():
+    """stp_robot ello
+
+    I should definitely add more stuff here
+    """
     twist_msg.linear.x = 0
     twist_msg.angular.z = 0
     pub_twist.publish(twist_msg)

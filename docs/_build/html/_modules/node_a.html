@@ -38,8 +38,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Modules list:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../node_a.html">node_a Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../node_b.html">node_b Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../node_c.html">node_c Module</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -97,7 +102,7 @@
 <span class="kn">from</span> <span class="nn">std_srvs.srv</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<div class="viewcode-block" id="clbk_odom"><a class="viewcode-back" href="../index.html#node_a.clbk_odom">[docs]</a><span class="k">def</span> <span class="nf">clbk_odom</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+<div class="viewcode-block" id="clbk_odom"><a class="viewcode-back" href="../node_a.html#node_a.clbk_odom">[docs]</a><span class="k">def</span> <span class="nf">clbk_odom</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Callback function for the :mod:`/odom` topic, returning a custom message that contains</span>
 <span class="sd">    only the position and linear velocity of the robot on :mod:`x` and :mod:`y` directions.</span>
@@ -129,12 +134,16 @@
     <span class="n">msg_custom</span><span class="o">.</span><span class="n">vel_y</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">twist</span><span class="o">.</span><span class="n">twist</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">y</span>
     <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg_custom</span><span class="p">)</span></div>
     
-<div class="viewcode-block" id="stp_robot"><a class="viewcode-back" href="../index.html#node_a.stp_robot">[docs]</a><span class="k">def</span> <span class="nf">stp_robot</span><span class="p">():</span>
+<div class="viewcode-block" id="stp_robot"><a class="viewcode-back" href="../node_a.html#node_a.stp_robot">[docs]</a><span class="k">def</span> <span class="nf">stp_robot</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;stp_robot ello</span>
+
+<span class="sd">    I should definitely add more stuff here</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">twist_msg</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">twist_msg</span><span class="o">.</span><span class="n">angular</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">pub_twist</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">twist_msg</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../index.html#node_a.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../node_a.html#node_a.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    aaa test :mod:`bbb.ex2`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -205,7 +214,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Vinicius Ferreira.</p>
+    <p>&#169; Copyright 2023, Vinícius Ferreira.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
