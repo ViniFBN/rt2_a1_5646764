@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_4f90b9c77dce33eb5fc3b9b84458c9fd" kind="dir">
+    <compoundname>/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts</compoundname>
+    <innerfile refid="node__a_8py">node_a.py</innerfile>
+    <innerfile refid="node__b_8py">node_b.py</innerfile>
+    <innerfile refid="node__c_8py">node_c.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/"/>
+  </compounddef>
+</doxygen>

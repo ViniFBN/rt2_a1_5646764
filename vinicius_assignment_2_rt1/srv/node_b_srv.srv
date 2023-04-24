@@ -1,0 +1,4 @@
+bool stat
+---
+int64 goal_num
+int64 cancel_num

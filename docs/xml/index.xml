@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.17">
+  <compound refid="namespacenode__a" kind="namespace"><name>node_a</name>
+    <member refid="namespacenode__a_1aeb62ea792aefeecb2cdb402003566e53" kind="function"><name>clbk_odom</name></member>
+    <member refid="namespacenode__a_1af9e9db5804127b434ec388f5788843af" kind="function"><name>stp_robot</name></member>
+    <member refid="namespacenode__a_1af94178204c08c6d9e2502abc86b943fc" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespacenode__b" kind="namespace"><name>node_b</name>
+    <member refid="namespacenode__b_1a09c96574d6e1357b72dbff24f1568782" kind="variable"><name>i_goal</name></member>
+    <member refid="namespacenode__b_1a9f327f7490f81b03b3a60fd3447950e1" kind="variable"><name>i_cancel</name></member>
+    <member refid="namespacenode__b_1a64163f9a980564dddf12af72608aec8d" kind="function"><name>clbk_srv</name></member>
+    <member refid="namespacenode__b_1a3a7f28e08394200cce6ef8c8944285eb" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespacenode__c" kind="namespace"><name>node_c</name>
+    <member refid="namespacenode__c_1aa7b9c6856e8b98a603bba7fef61c0598" kind="variable"><name>vel_list_x</name></member>
+    <member refid="namespacenode__c_1a74e7d6310938535178333487fb2b09c4" kind="variable"><name>vel_list_y</name></member>
+    <member refid="namespacenode__c_1ad213ec39ab1336b1190b34da6db163fb" kind="variable"><name>pos_print_x</name></member>
+    <member refid="namespacenode__c_1a9a09ee27e7c3f1b7d868e6f2adb7f740" kind="variable"><name>pos_print_y</name></member>
+    <member refid="namespacenode__c_1a2a8b53988bd43dca3bf43a654ca416a6" kind="variable"><name>vel_print_x</name></member>
+    <member refid="namespacenode__c_1ab5954a987f8666f7e3ba80bc2caedb6b" kind="variable"><name>vel_print_y</name></member>
+    <member refid="namespacenode__c_1ab3d407b2efe6f9b8f1f7bff1a6df3320" kind="variable"><name>desired_position_</name></member>
+    <member refid="namespacenode__c_1a83e7a99ba9cb72aa3779e9830c649b13" kind="variable"><name>z</name></member>
+    <member refid="namespacenode__c_1a9ad93ea9972d6485694b04d3a7a7e6aa" kind="function"><name>clbk_function</name></member>
+    <member refid="namespacenode__c_1a067f3c073f81315b1c4e2a61b86c03db" kind="function"><name>desired_pos</name></member>
+    <member refid="namespacenode__c_1ad3450df4bc49ad8a33452932c8085296" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespacestd__srvs_1_1srv" kind="namespace"><name>std_srvs::srv</name>
+  </compound>
+  <compound refid="node__a_8py" kind="file"><name>node_a.py</name>
+  </compound>
+  <compound refid="node__b_8py" kind="file"><name>node_b.py</name>
+  </compound>
+  <compound refid="node__c_8py" kind="file"><name>node_c.py</name>
+  </compound>
+  <compound refid="dir_4f90b9c77dce33eb5fc3b9b84458c9fd" kind="dir"><name>/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts</name>
+  </compound>
+  <compound refid="dir_6550f5626ff635c50a776a9cade6618e" kind="dir"><name>/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1</name>
+  </compound>
+</doxygenindex>

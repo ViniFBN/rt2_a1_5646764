@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="node__a_8py" kind="file" language="Python">
+    <compoundname>node_a.py</compoundname>
+    <innernamespace refid="namespacenode__a">node_a</innernamespace>
+    <innernamespace refid="namespacestd__srvs_1_1srv">std_srvs::srv</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="namespacenode__a" refkind="compound"><highlight class="comment">#!<sp/>/usr/bin/env<sp/>python3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="4"><highlight class="stringliteral">A<sp/>node<sp/>that<sp/>implements<sp/>an<sp/>action<sp/>client,<sp/>allowing<sp/>the<sp/>user<sp/>to<sp/>set<sp/>a<sp/>target<sp/>:mod:`(x,<sp/>y)`</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral">or<sp/>to<sp/>cancel<sp/>it.<sp/>The<sp/>node<sp/>also<sp/>publishes<sp/>the<sp/>robot<sp/>position<sp/>and<sp/>velocity<sp/>as<sp/>a<sp/>custom<sp/></highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral">message<sp/>:mod:`(x,y,<sp/>vel_x,<sp/>vel_z)`,<sp/>by<sp/>relying<sp/>on<sp/>the<sp/>values<sp/>published<sp/>on<sp/>the<sp/>topic<sp/>:mod:`/odom`.</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral">Topics</highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral">------</highlight></codeline>
+<codeline lineno="10"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="11"><highlight class="stringliteral">Subscribes<sp/>to:</highlight></codeline>
+<codeline lineno="12"><highlight class="stringliteral"><sp/><sp/>:mod:`/odom`</highlight></codeline>
+<codeline lineno="13"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="14"><highlight class="stringliteral">Publishes<sp/>to:</highlight></codeline>
+<codeline lineno="15"><highlight class="stringliteral"><sp/><sp/>:mod:`/cmd_vel`</highlight></codeline>
+<codeline lineno="16"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="stringliteral"><sp/><sp/>:mod:`/node_a_info`</highlight></codeline>
+<codeline lineno="18"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="19"><highlight class="stringliteral">&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>rospy</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>os</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib.msg</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>assignment_2_2022.msg</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>vinicius_assignment_2_rt1.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>node_a_msg</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>geometry_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Twist</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>nav_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Odometry</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>tf<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>transformations</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/><ref refid="namespacestd__srvs_1_1srv" kindref="compound">std_srvs.srv</ref><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>*</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>time</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__a_1aeb62ea792aefeecb2cdb402003566e53" kindref="member">clbk_odom</ref>(msg):</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="35"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Callback<sp/>function<sp/>for<sp/>the<sp/>:mod:`/odom`<sp/>topic,<sp/>returning<sp/>a<sp/>custom<sp/>message<sp/>that<sp/>contains</highlight></codeline>
+<codeline lineno="36"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>only<sp/>the<sp/>position<sp/>and<sp/>linear<sp/>velocity<sp/>of<sp/>the<sp/>robot<sp/>on<sp/>:mod:`x`<sp/>and<sp/>:mod:`y`<sp/>directions.</highlight></codeline>
+<codeline lineno="37"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:param<sp/>msg:<sp/>The<sp/>message<sp/>received<sp/>from<sp/>the<sp/>publisher.</highlight></codeline>
+<codeline lineno="39"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:type<sp/>msg:<sp/>nav_msgs.msg.Odometry</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:return:<sp/>Custom<sp/>message<sp/>with<sp/>position<sp/>and<sp/>linear<sp/>velocity<sp/>of<sp/>the<sp/>robot.</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:rtype:<sp/>vinicius_assignment_2_rt1.msg.node_a_msg</highlight></codeline>
+<codeline lineno="42"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>position_,<sp/>yaw_,<sp/>pose_</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>position</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>position_<sp/>=<sp/>msg.pose.pose.position</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>pose_<sp/>=<sp/>msg.pose.pose</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>yaw</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>quaternion<sp/>=<sp/>(</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>msg.pose.pose.orientation.x,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>msg.pose.pose.orientation.y,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>msg.pose.pose.orientation.z,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>msg.pose.pose.orientation.w)</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>euler<sp/>=<sp/>transformations.euler_from_quaternion(quaternion)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>yaw_<sp/>=<sp/>euler[2]</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>msg_custom<sp/>=<sp/>node_a_msg()</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>msg_custom.x<sp/>=<sp/>position_.x</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>msg_custom.y<sp/>=<sp/>position_.y</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>msg_custom.vel_x<sp/>=<sp/>msg.twist.twist.linear.x</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>msg_custom.vel_y<sp/>=<sp/>msg.twist.twist.linear.y</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>pub.publish(msg_custom)</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__a_1af9e9db5804127b434ec388f5788843af" kindref="member">stp_robot</ref>():</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>twist_msg.linear.x<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>twist_msg.angular.z<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>pub_twist.publish(twist_msg)</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__a_1af94178204c08c6d9e2502abc86b943fc" kindref="member">main</ref>():</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="72"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>aaa<sp/>test<sp/>:mod:`bbb.ex2`</highlight></codeline>
+<codeline lineno="73"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>pub,<sp/>pub_twist,<sp/>twist_msg</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.on_shutdown(stp_robot)<sp/></highlight><highlight class="comment">#<sp/>Capturing<sp/>the<sp/>stop<sp/>part</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.init_node(</highlight><highlight class="stringliteral">&apos;node_a&apos;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Custom<sp/>message<sp/>part</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>twist_msg<sp/>=<sp/>Twist()</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>pub_twist<sp/>=<sp/>rospy.Publisher(</highlight><highlight class="stringliteral">&apos;/cmd_vel&apos;</highlight><highlight class="normal">,<sp/>Twist,<sp/>queue_size=1)</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>sub_odom<sp/>=<sp/>rospy.Subscriber(</highlight><highlight class="stringliteral">&apos;/odom&apos;</highlight><highlight class="normal">,<sp/>Odometry,<sp/>clbk_odom)</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>pub<sp/>=<sp/>rospy.Publisher(</highlight><highlight class="stringliteral">&apos;/node_a_info&apos;</highlight><highlight class="normal">,<sp/>node_a_msg,<sp/>queue_size=1)</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>can_var<sp/>=<sp/>rospy.get_param(rospy.search_param(</highlight><highlight class="stringliteral">&quot;cancel&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>can_var<sp/>==<sp/></highlight><highlight class="keyword">True</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;Cancelling<sp/>current<sp/>target<sp/>goal.\n&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rospy.set_param(rospy.search_param(</highlight><highlight class="stringliteral">&quot;cancel&quot;</highlight><highlight class="normal">),<sp/></highlight><highlight class="keyword">False</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacenode__a_1af9e9db5804127b434ec388f5788843af" kindref="member">stp_robot</ref>()</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>os.system(</highlight><highlight class="stringliteral">&quot;rosnode<sp/>kill<sp/>/node_a&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sys.exit(0)</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_bug<sp/>=<sp/>actionlib.SimpleActionClient(</highlight><highlight class="stringliteral">&apos;/reaching_goal_bug&apos;</highlight><highlight class="normal">,<sp/>assignment_2_2022.msg.PlanningAction)</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_bug.wait_for_server()<sp/></highlight><highlight class="comment">#<sp/>Waiting<sp/>for<sp/>the<sp/>action<sp/>server</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>to<sp/>go_to_point_service.py</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_point<sp/>=<sp/>actionlib.SimpleActionClient(</highlight><highlight class="stringliteral">&apos;/reaching_goal_point&apos;</highlight><highlight class="normal">,<sp/>assignment_2_2022.msg.PlanningAction)</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_point.wait_for_server()<sp/></highlight><highlight class="comment">#<sp/>Waiting<sp/>for<sp/>the<sp/>action<sp/>server</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>to<sp/>node_c.py</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_c<sp/>=<sp/>actionlib.SimpleActionClient(</highlight><highlight class="stringliteral">&apos;/reaching_goal_c&apos;</highlight><highlight class="normal">,<sp/>assignment_2_2022.msg.PlanningAction)</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_c.wait_for_server()<sp/></highlight><highlight class="comment">#<sp/>Waiting<sp/>for<sp/>the<sp/>action<sp/>server</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Goal<sp/>to<sp/>be<sp/>sent<sp/>to<sp/>the<sp/>action<sp/>server</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>goal_send<sp/>=<sp/>assignment_2_2022.msg.PlanningGoal()<sp/></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Target<sp/>location</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>goal_send.target_pose.pose.position.x<sp/>=<sp/>rospy.get_param(rospy.search_param(</highlight><highlight class="stringliteral">&apos;x&apos;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>goal_send.target_pose.pose.position.y<sp/>=<sp/>rospy.get_param(rospy.search_param(</highlight><highlight class="stringliteral">&apos;y&apos;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Sending<sp/>the<sp/>goal<sp/>to<sp/>the<sp/>server</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_bug.send_goal(goal_send)</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_point.send_goal(goal_send)</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_c.send_goal(goal_send)</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.delete_param(rospy.search_param(</highlight><highlight class="stringliteral">&apos;x&apos;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.delete_param(rospy.search_param(</highlight><highlight class="stringliteral">&apos;y&apos;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Blocking<sp/>signals<sp/>until<sp/>goal<sp/>is<sp/>reached</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_bug.wait_for_result()<sp/></highlight><highlight class="comment">#<sp/>Waits<sp/>for<sp/>the<sp/>server<sp/>to<sp/>finish<sp/>the<sp/>action<sp/>sent</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_bug.get_result()<sp/></highlight><highlight class="comment">#<sp/>Gets<sp/>result<sp/>from<sp/>the<sp/>server<sp/>(PlanningResult)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_point.wait_for_result()<sp/></highlight><highlight class="comment">#<sp/>Waits<sp/>for<sp/>the<sp/>server<sp/>to<sp/>finish<sp/>the<sp/>action<sp/>sent</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_point.get_result()<sp/></highlight><highlight class="comment">#<sp/>Gets<sp/>result<sp/>from<sp/>the<sp/>server<sp/>(PlanningResult)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_c.wait_for_result()<sp/></highlight><highlight class="comment">#<sp/>Waits<sp/>for<sp/>the<sp/>server<sp/>to<sp/>finish<sp/>the<sp/>action<sp/>sent</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>act_c_c.get_result()<sp/></highlight><highlight class="comment">#<sp/>Gets<sp/>result<sp/>from<sp/>the<sp/>server<sp/>(PlanningResult)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>__name__<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;__main__&quot;</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacenode__a_1af94178204c08c6d9e2502abc86b943fc" kindref="member">main</ref>()</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py"/>
+  </compounddef>
+</doxygen>

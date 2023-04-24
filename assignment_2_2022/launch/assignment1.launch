@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find assignment_2_2022)/launch/sim_w1.launch" />
+    <arg name="x" default="0.0" />
+    <arg name="y" default="1.0" />
+    <arg name="rate_c" default="3" />
+    <arg name="cancel" default="False" />
+
+    <param name="x" value= "$(arg x)" />
+    <param name="y" value= "$(arg y)" />
+    <param name="des_rate_c" value= "$(arg rate_c)" />
+    <param name="cancel" value= "$(arg cancel)" />
+
+    <node pkg="vinicius_assignment_2_rt1" type="node_a.py" name="node_a" output="screen" />
+    <node pkg="vinicius_assignment_2_rt1" type="node_b.py" name="node_b" output="screen" launch-prefix="terminator --execute"/>
+
+    <node pkg="assignment_2_2022" type="wall_follow_service.py" name="wall_follower"      output="screen" />
+    <node pkg="assignment_2_2022" type="go_to_point_service.py" name="go_to_point"        output="screen" />
+    <node pkg="assignment_2_2022" type="bug_as.py"              name="bug_action_service" output="screen" />
+    
+    <node pkg="vinicius_assignment_2_rt1" type="node_c.py" name="node_c" output="screen" launch-prefix="terminator --execute" />
+
+</launch>
