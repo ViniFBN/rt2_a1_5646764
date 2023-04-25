@@ -3,7 +3,7 @@
       on vscode (inside src/docs/):
          doxygen Doxyfile && make html
 
-      on terminal (or just use github desktop):
+      on terminal running on src/ (or just use github desktop):
          git init
          git branch
          git add .
@@ -12,7 +12,7 @@
    
    2. send the differences to the gh-pages branch:
       on terminal running on src/:
-         git init
+         git init (if not itialized before, as well as all the add . and commit -m "whatever")
          git subtree push --prefix docs/_build/html/ origin gh-pages
 
 
@@ -28,7 +28,7 @@ Indices and tables
 Introduction
 ************
 
-This documentation is part of the continuous assessment for the Research Track 2 course,
+This documentation is part of the continuous assessment for the **Research Track 2** course,
 done by **Vinícius Ferreira (S5646764)**.
 
 The documentation itself is about the codes designed for the final assignment on Research

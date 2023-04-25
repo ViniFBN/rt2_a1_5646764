@@ -74,20 +74,23 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">A node that implements an action client, allowing the user to set a target :mod:`(x, y)`</span>
-<span class="sd">or to cancel it. The node also publishes the robot position and velocity as a custom </span>
-<span class="sd">message :mod:`(x,y, vel_x, vel_z)`, by relying on the values published on the topic :mod:`/odom`.</span>
+<span class="sd">or to cancel it. The node also publishes the robot position and velocity :mod:`(x,y, vel_x, vel_z)`</span>
+<span class="sd">as a custom message :mod:`/node_a_info`, by relying on the values published on the topic :mod:`/odom`. </span>
 
 <span class="sd">Topics</span>
 <span class="sd">------</span>
 
 <span class="sd">Subscribes to:</span>
-<span class="sd">  :mod:`/odom`</span>
+<span class="sd">  * :mod:`/odom`</span>
 
 <span class="sd">Publishes to:</span>
-<span class="sd">  :mod:`/cmd_vel`</span>
+<span class="sd">  * :mod:`/cmd_vel`</span>
+<span class="sd">  * :mod:`/node_a_info`</span>
 <span class="sd">  </span>
-<span class="sd">  :mod:`/node_a_info`</span>
-<span class="sd">  </span>
+<span class="sd">Goal actions:</span>
+<span class="sd">  * :mod:`/reaching_goal_bug`</span>
+<span class="sd">  * :mod:`/reaching_goal_point`</span>
+<span class="sd">  * :mod:`/reaching_goal_c`</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">rospy</span>
@@ -104,13 +107,12 @@
 
 <div class="viewcode-block" id="clbk_odom"><a class="viewcode-back" href="../node_a.html#node_a.clbk_odom">[docs]</a><span class="k">def</span> <span class="nf">clbk_odom</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Callback function for the :mod:`/odom` topic, returning a custom message that contains</span>
-<span class="sd">    only the position and linear velocity of the robot on :mod:`x` and :mod:`y` directions.</span>
+<span class="sd">    Callback function for the :mod:`/odom` topic subscription, reading from the topic message and </span>
+<span class="sd">    returning a custom message that contains the position and linear velocity of the </span>
+<span class="sd">    robot on :mod:`x` and :mod:`y` directions.</span>
 
-<span class="sd">    :param msg: The message received from the publisher.</span>
+<span class="sd">    :param msg: The message received from the publisher containing data for `Pose` and `Twist`.</span>
 <span class="sd">    :type msg: nav_msgs.msg.Odometry</span>
-<span class="sd">    :return: Custom message with position and linear velocity of the robot.</span>
-<span class="sd">    :rtype: vinicius_assignment_2_rt1.msg.node_a_msg</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">position_</span><span class="p">,</span> <span class="n">yaw_</span><span class="p">,</span> <span class="n">pose_</span>
 
@@ -135,9 +137,9 @@
     <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg_custom</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="stp_robot"><a class="viewcode-back" href="../node_a.html#node_a.stp_robot">[docs]</a><span class="k">def</span> <span class="nf">stp_robot</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;stp_robot ello</span>
-
-<span class="sd">    I should definitely add more stuff here</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function that publishes a message of type *Twist* with values equal to 0,</span>
+<span class="sd">    in order to stop the robot, to the topic :mod:`/cmd_vel`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">twist_msg</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">twist_msg</span><span class="o">.</span><span class="n">angular</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
@@ -145,7 +147,11 @@
 
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../node_a.html#node_a.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    aaa test :mod:`bbb.ex2`</span>
+<span class="sd">    Main function of the node. Initializes the node and sets up publishers and subscribers, </span>
+<span class="sd">    as well as communication with action servers while waiting for new goals to be set. </span>
+<span class="sd">    </span>
+<span class="sd">    Checks if the *cancel* command is active, in order to cancel the goal set by the user,</span>
+<span class="sd">    also checking the new goal parameteres sent to the program.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">pub</span><span class="p">,</span> <span class="n">pub_twist</span><span class="p">,</span> <span class="n">twist_msg</span>
     

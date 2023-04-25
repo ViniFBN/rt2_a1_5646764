@@ -81,32 +81,37 @@
   <section id="module-node_a">
 <span id="node-a-module"></span><h1>node_a Module<a class="headerlink" href="#module-node_a" title="Permalink to this heading"></a></h1>
 <p>A node that implements an action client, allowing the user to set a target <code class="xref py py-mod docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code>
-or to cancel it. The node also publishes the robot position and velocity as a custom
-message <code class="xref py py-mod docutils literal notranslate"><span class="pre">(x,y,</span> <span class="pre">vel_x,</span> <span class="pre">vel_z)</span></code>, by relying on the values published on the topic <code class="xref py py-mod docutils literal notranslate"><span class="pre">/odom</span></code>.</p>
+or to cancel it. The node also publishes the robot position and velocity <code class="xref py py-mod docutils literal notranslate"><span class="pre">(x,y,</span> <span class="pre">vel_x,</span> <span class="pre">vel_z)</span></code>
+as a custom message <code class="xref py py-mod docutils literal notranslate"><span class="pre">/node_a_info</span></code>, by relying on the values published on the topic <code class="xref py py-mod docutils literal notranslate"><span class="pre">/odom</span></code>.</p>
 <section id="topics">
 <h2>Topics<a class="headerlink" href="#topics" title="Permalink to this heading"></a></h2>
-<dl>
-<dt>Subscribes to:</dt><dd><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/odom</span></code></p>
+<dl class="simple">
+<dt>Subscribes to:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/odom</span></code></p></li>
+</ul>
 </dd>
-<dt>Publishes to:</dt><dd><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/cmd_vel</span></code></p>
-<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/node_a_info</span></code></p>
+<dt>Publishes to:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/cmd_vel</span></code></p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/node_a_info</span></code></p></li>
+</ul>
+</dd>
+<dt>Goal actions:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/reaching_goal_bug</span></code></p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/reaching_goal_point</span></code></p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/reaching_goal_c</span></code></p></li>
+</ul>
 </dd>
 </dl>
 </section>
 <dl class="py function">
 <dt class="sig sig-object py" id="node_a.clbk_odom">
 <span class="sig-prename descclassname"><span class="pre">node_a.</span></span><span class="sig-name descname"><span class="pre">clbk_odom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/node_a.html#clbk_odom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#node_a.clbk_odom" title="Permalink to this definition"></a></dt>
-<dd><p>Callback function for the <code class="xref py py-mod docutils literal notranslate"><span class="pre">/odom</span></code> topic, returning a custom message that contains
-only the position and linear velocity of the robot on <code class="xref py py-mod docutils literal notranslate"><span class="pre">x</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">y</span></code> directions.</p>
+<dd><p>Callback function for the <code class="xref py py-mod docutils literal notranslate"><span class="pre">/odom</span></code> topic subscription, reading from the topic message and
+returning a custom message that contains the position and linear velocity of the
+robot on <code class="xref py py-mod docutils literal notranslate"><span class="pre">x</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">y</span></code> directions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>msg</strong> (<em>nav_msgs.msg.Odometry</em>) – The message received from the publisher.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Custom message with position and linear velocity of the robot.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>vinicius_assignment_2_rt1.msg.node_a_msg</p>
+<dd class="field-odd"><p><strong>msg</strong> (<em>nav_msgs.msg.Odometry</em>) – The message received from the publisher containing data for <cite>Pose</cite> and <cite>Twist</cite>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -114,14 +119,17 @@ only the position and linear velocity of the robot on <code class="xref py py-mo
 <dl class="py function">
 <dt class="sig sig-object py" id="node_a.main">
 <span class="sig-prename descclassname"><span class="pre">node_a.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/node_a.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#node_a.main" title="Permalink to this definition"></a></dt>
-<dd><p>aaa test <code class="xref py py-mod docutils literal notranslate"><span class="pre">bbb.ex2</span></code></p>
+<dd><p>Main function of the node. Initializes the node and sets up publishers and subscribers,
+as well as communication with action servers while waiting for new goals to be set.</p>
+<p>Checks if the <em>cancel</em> command is active, in order to cancel the goal set by the user,
+also checking the new goal parameteres sent to the program.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="node_a.stp_robot">
 <span class="sig-prename descclassname"><span class="pre">node_a.</span></span><span class="sig-name descname"><span class="pre">stp_robot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/node_a.html#stp_robot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#node_a.stp_robot" title="Permalink to this definition"></a></dt>
-<dd><p>stp_robot ello</p>
-<p>I should definitely add more stuff here</p>
+<dd><p>Function that publishes a message of type <em>Twist</em> with values equal to 0,
+in order to stop the robot, to the topic <code class="xref py py-mod docutils literal notranslate"><span class="pre">/cmd_vel</span></code>.</p>
 </dd></dl>
 
 </section>

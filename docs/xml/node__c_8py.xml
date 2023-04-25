@@ -10,85 +10,121 @@
     <programlisting>
 <codeline lineno="1" refid="namespacenode__c" refkind="compound"><highlight class="comment">#!<sp/>/usr/bin/env<sp/>python3</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2"><highlight class="normal"></highlight></codeline>
-<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>rospy</highlight></codeline>
-<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>math</highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib</highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib.msg</highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>assignment_2_2022.msg</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>vinicius_assignment_2_rt1.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>node_a_msg</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>geometry_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Point,<sp/>Pose,<sp/>Twist</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>nav_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Odometry</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>tf<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>transformations</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/><ref refid="namespacestd__srvs_1_1srv" kindref="compound">std_srvs.srv</ref><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>*</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>time</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">#<sp/>global<sp/>variables</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal">vel_list_x<sp/>=<sp/>[]</highlight></codeline>
-<codeline lineno="17"><highlight class="normal">vel_list_y<sp/>=<sp/>[]</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="4"><highlight class="stringliteral">A<sp/>node<sp/>that<sp/>subscribes<sp/>to<sp/>the<sp/>robot&apos;s<sp/>position<sp/>and<sp/>velocity<sp/>(using<sp/>the<sp/>custom<sp/>message<sp/>from<sp/>:mod:`/node_a_info`)</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral">and<sp/>prints<sp/>the<sp/>distance<sp/>of<sp/>the<sp/>robot<sp/>from<sp/>the<sp/>target<sp/>and<sp/>the<sp/>robot&apos;s<sp/>average<sp/>speed.</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral">The<sp/>node<sp/>uses<sp/>a<sp/>parameter<sp/>:mod:`des_rate_c`<sp/>to<sp/>set<sp/>how<sp/>fast<sp/>it<sp/>publishes<sp/>the<sp/>information.</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral">Topics</highlight></codeline>
+<codeline lineno="10"><highlight class="stringliteral">------</highlight></codeline>
+<codeline lineno="11"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="12"><highlight class="stringliteral">Subscribes<sp/>to:</highlight></codeline>
+<codeline lineno="13"><highlight class="stringliteral"><sp/><sp/>*<sp/>:mod:`/node_a_info`</highlight></codeline>
+<codeline lineno="14"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="stringliteral">Goal<sp/>actions:</highlight></codeline>
+<codeline lineno="16"><highlight class="stringliteral"><sp/><sp/>*<sp/>:mod:`/reaching_goal_c`</highlight></codeline>
+<codeline lineno="17"><highlight class="stringliteral">&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19"><highlight class="normal">pos_print_x<sp/>=<sp/>0</highlight></codeline>
-<codeline lineno="20"><highlight class="normal">pos_print_y<sp/>=<sp/>0</highlight></codeline>
-<codeline lineno="21"><highlight class="normal">vel_print_x<sp/>=<sp/>0</highlight></codeline>
-<codeline lineno="22"><highlight class="normal">vel_print_y<sp/>=<sp/>0</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal">desired_position_<sp/>=<sp/>Point()</highlight></codeline>
-<codeline lineno="25"><highlight class="normal">desired_position_.z<sp/>=<sp/>0</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__c_1a9ad93ea9972d6485694b04d3a7a7e6aa" kindref="member">clbk_function</ref>(msg):<sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>pos_print_x,<sp/>pos_print_y,<sp/>vel_print_x,<sp/>vel_print_y</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Position</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>pos_current_x<sp/>=<sp/>msg.x</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>pos_current_y<sp/>=<sp/>msg.y</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>posx<sp/>=<sp/>desired_position_.x</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>posy<sp/>=<sp/>desired_position_.y</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>pos_print_x<sp/>=<sp/>pos_current_x<sp/>-<sp/>posx</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>pos_print_y<sp/>=<sp/>pos_current_y<sp/>-<sp/>posy</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Average<sp/>velocity</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_current_x<sp/>=<sp/>msg.vel_x</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_current_y<sp/>=<sp/>msg.vel_y</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>CALCULATE<sp/>AVERAGE<sp/>VELOCITY<sp/>HERE</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_list_x.append(vel_current_x)</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_list_y.append(vel_current_y)</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_print_x<sp/>=<sp/>sum(vel_list_x)/len(vel_list_x)</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_print_y<sp/>=<sp/>sum(vel_list_y)/len(vel_list_y)</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__c_1a067f3c073f81315b1c4e2a61b86c03db" kindref="member">desired_pos</ref>(goal):</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>act_s</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>desired_position_.x<sp/>=<sp/>goal.target_pose.pose.position.x</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>desired_position_.y<sp/>=<sp/>goal.target_pose.pose.position.y</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>feedback<sp/>=<sp/>assignment_2_2022.msg.PlanningFeedback()</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>=<sp/>assignment_2_2022.msg.PlanningResult()</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>rospy</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>math</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib.msg</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>assignment_2_2022.msg</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>vinicius_assignment_2_rt1.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>node_a_msg</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>geometry_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Point,<sp/>Pose,<sp/>Twist</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>nav_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Odometry</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>tf<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>transformations</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/><ref refid="namespacestd__srvs_1_1srv" kindref="compound">std_srvs.srv</ref><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>*</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>time</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">#<sp/>global<sp/>variables</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal">vel_list_x<sp/>=<sp/>[]</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">vel_list_y<sp/>=<sp/>[]</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal">pos_print_x<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">pos_print_y<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">vel_print_x<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">vel_print_y<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal">desired_position_<sp/>=<sp/>Point()</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">desired_position_.z<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__c_1a9ad93ea9972d6485694b04d3a7a7e6aa" kindref="member">clbk_function</ref>(msg):</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="45"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Callback<sp/>function<sp/>for<sp/>the<sp/>:mod:`/node_a_info`<sp/>topic<sp/>subscription,<sp/>reading<sp/>the<sp/>published</highlight></codeline>
+<codeline lineno="46"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>information<sp/>on<sp/>position<sp/>and<sp/>velocity<sp/>and<sp/>calculating<sp/>the<sp/>distance<sp/>to<sp/>goal<sp/>and</highlight></codeline>
+<codeline lineno="47"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>average<sp/>velocity,<sp/>on<sp/>both<sp/>directions<sp/>:mod:`x`<sp/>and<sp/>:mod:`y`.</highlight></codeline>
+<codeline lineno="48"><highlight class="stringliteral"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="49"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:param<sp/>msg:<sp/>The<sp/>message<sp/>received<sp/>from<sp/>the<sp/>publisher<sp/>containing<sp/>data<sp/>for<sp/>`Pose`<sp/>and<sp/>`Twist`.</highlight></codeline>
+<codeline lineno="50"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:type<sp/>msg:<sp/>vinicius_assignment_2_rt1.msg.node_a_msg</highlight></codeline>
+<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>pos_print_x,<sp/>pos_print_y,<sp/>vel_print_x,<sp/>vel_print_y</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Position</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>pos_current_x<sp/>=<sp/>msg.x</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>pos_current_y<sp/>=<sp/>msg.y</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>feedback.stat<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Goal<sp/>defined.&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>act_s.set_succeeded(result)</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__c_1ad3450df4bc49ad8a33452932c8085296" kindref="member">main</ref>():</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>act_s</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.init_node(</highlight><highlight class="stringliteral">&apos;node_c&apos;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Starting<sp/>the<sp/>action<sp/>server</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>act_s<sp/>=<sp/>actionlib.SimpleActionServer(</highlight><highlight class="stringliteral">&apos;/reaching_goal_c&apos;</highlight><highlight class="normal">,<sp/>assignment_2_2022.msg.PlanningAction,<sp/>desired_pos,<sp/>auto_start=</highlight><highlight class="keyword">False</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>act_s.start()</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>sub_custom<sp/>=<sp/>rospy.Subscriber(</highlight><highlight class="stringliteral">&apos;/node_a_info&apos;</highlight><highlight class="normal">,<sp/>node_a_msg,<sp/>clbk_function)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>posx<sp/>=<sp/>desired_position_.x</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>posy<sp/>=<sp/>desired_position_.y</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>pos_print_x<sp/>=<sp/>pos_current_x<sp/>-<sp/>posx</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>pos_print_y<sp/>=<sp/>pos_current_y<sp/>-<sp/>posy</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Average<sp/>velocity</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_current_x<sp/>=<sp/>msg.vel_x</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_current_y<sp/>=<sp/>msg.vel_y</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>CALCULATE<sp/>AVERAGE<sp/>VELOCITY<sp/>HERE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_list_x.append(vel_current_x)</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_list_y.append(vel_current_y)</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>rate_c<sp/>=<sp/>rospy.get_param(</highlight><highlight class="stringliteral">&apos;des_rate_c&apos;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>rate<sp/>=<sp/>rospy.Rate(rate_c)</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">not</highlight><highlight class="normal"><sp/>rospy.is_shutdown():</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;\nDistance<sp/>to<sp/>the<sp/>goal:<sp/>\nx:&quot;</highlight><highlight class="normal">,<sp/>pos_print_x,</highlight><highlight class="stringliteral">&quot;\ny:&quot;</highlight><highlight class="normal">,<sp/>pos_print_y,</highlight><highlight class="stringliteral">&quot;\nNorm:&quot;</highlight><highlight class="normal">,math.sqrt(pow(pos_print_x,<sp/>2)<sp/>+<sp/>pow(pos_print_y,<sp/>2)))</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;\nAverage<sp/>velocity<sp/>of<sp/>the<sp/>robot:<sp/>\nvel_x:&quot;</highlight><highlight class="normal">,<sp/>vel_print_x,</highlight><highlight class="stringliteral">&quot;\nvel_y:&quot;</highlight><highlight class="normal">,<sp/>vel_print_y)</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;\n=====================================================&quot;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rate.sleep()</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>__name__<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;__main__&quot;</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacenode__c_1ad3450df4bc49ad8a33452932c8085296" kindref="member">main</ref>()</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_print_x<sp/>=<sp/>sum(vel_list_x)/len(vel_list_x)</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>vel_print_y<sp/>=<sp/>sum(vel_list_y)/len(vel_list_y)</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__c_1a067f3c073f81315b1c4e2a61b86c03db" kindref="member">desired_pos</ref>(goal):</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="76"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Function<sp/>used<sp/>on<sp/>the<sp/>simple<sp/>action<sp/>server<sp/>:mod:`/reaching_goal_c`.<sp/>Sets<sp/>the</highlight></codeline>
+<codeline lineno="77"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>desired<sp/>position<sp/>of<sp/>the<sp/>goal.</highlight></codeline>
+<codeline lineno="78"><highlight class="stringliteral"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="79"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:param<sp/>goal:<sp/>The<sp/>request<sp/>object<sp/>containing<sp/>the<sp/>:mod:`target_pose`<sp/>attribute.</highlight></codeline>
+<codeline lineno="80"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:type<sp/>goal:<sp/>assignment_2_2022.msg.PlanningAction</highlight></codeline>
+<codeline lineno="81"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>act_s</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>desired_position_.x<sp/>=<sp/>goal.target_pose.pose.position.x</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>desired_position_.y<sp/>=<sp/>goal.target_pose.pose.position.y</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>feedback<sp/>=<sp/>assignment_2_2022.msg.PlanningFeedback()</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>=<sp/>assignment_2_2022.msg.PlanningResult()</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>feedback.stat<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Goal<sp/>defined.&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>act_s.set_succeeded(result)</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__c_1ad3450df4bc49ad8a33452932c8085296" kindref="member">main</ref>():</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="94"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Main<sp/>function<sp/>of<sp/>the<sp/>node.<sp/>Initializes<sp/>the<sp/>node<sp/>and<sp/>sets<sp/>up<sp/>the<sp/>action<sp/>server,<sp/>as<sp/>well<sp/>as</highlight></codeline>
+<codeline lineno="95"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>subscribing<sp/>to<sp/>:mod:`/node_a_info`<sp/>topic.<sp/>Sets<sp/>up<sp/>the<sp/>frequency<sp/>in<sp/>which<sp/>the<sp/>information</highlight></codeline>
+<codeline lineno="96"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>is<sp/>posted<sp/>on<sp/>the<sp/>console.</highlight></codeline>
+<codeline lineno="97"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>act_s</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.init_node(</highlight><highlight class="stringliteral">&apos;node_c&apos;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Starting<sp/>the<sp/>action<sp/>server</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>act_s<sp/>=<sp/>actionlib.SimpleActionServer(</highlight><highlight class="stringliteral">&apos;/reaching_goal_c&apos;</highlight><highlight class="normal">,<sp/>assignment_2_2022.msg.PlanningAction,<sp/>desired_pos,<sp/>auto_start=</highlight><highlight class="keyword">False</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>act_s.start()</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>sub_custom<sp/>=<sp/>rospy.Subscriber(</highlight><highlight class="stringliteral">&apos;/node_a_info&apos;</highlight><highlight class="normal">,<sp/>node_a_msg,<sp/>clbk_function)</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>rate_c<sp/>=<sp/>rospy.get_param(</highlight><highlight class="stringliteral">&apos;des_rate_c&apos;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>rate<sp/>=<sp/>rospy.Rate(rate_c)</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">not</highlight><highlight class="normal"><sp/>rospy.is_shutdown():</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;\nDistance<sp/>to<sp/>the<sp/>goal:<sp/>\nx:&quot;</highlight><highlight class="normal">,<sp/>pos_print_x,</highlight><highlight class="stringliteral">&quot;\ny:&quot;</highlight><highlight class="normal">,<sp/>pos_print_y,</highlight><highlight class="stringliteral">&quot;\nNorm:&quot;</highlight><highlight class="normal">,math.sqrt(pow(pos_print_x,<sp/>2)<sp/>+<sp/>pow(pos_print_y,<sp/>2)))</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;\nAverage<sp/>velocity<sp/>of<sp/>the<sp/>robot:<sp/>\nvel_x:&quot;</highlight><highlight class="normal">,<sp/>vel_print_x,</highlight><highlight class="stringliteral">&quot;\nvel_y:&quot;</highlight><highlight class="normal">,<sp/>vel_print_y)</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;\n=====================================================&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rate.sleep()</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>__name__<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;__main__&quot;</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacenode__c_1ad3450df4bc49ad8a33452932c8085296" kindref="member">main</ref>()</highlight></codeline>
     </programlisting>
     <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py"/>
   </compounddef>

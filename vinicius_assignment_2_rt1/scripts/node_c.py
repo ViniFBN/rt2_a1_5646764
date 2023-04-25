@@ -1,5 +1,21 @@
 #! /usr/bin/env python3
 
+"""
+A node that subscribes to the robot's position and velocity (using the custom message from :mod:`/node_a_info`)
+and prints the distance of the robot from the target and the robot's average speed.
+
+The node uses a parameter :mod:`des_rate_c` to set how fast it publishes the information.
+
+Topics
+------
+
+Subscribes to:
+  * :mod:`/node_a_info`
+  
+Goal actions:
+  * :mod:`/reaching_goal_c`
+"""
+
 import rospy
 import math
 import actionlib
@@ -24,7 +40,15 @@ vel_print_y = 0
 desired_position_ = Point()
 desired_position_.z = 0
 
-def clbk_function(msg):    
+def clbk_function(msg):
+    """
+    Callback function for the :mod:`/node_a_info` topic subscription, reading the published
+    information on position and velocity and calculating the distance to goal and
+    average velocity, on both directions :mod:`x` and :mod:`y`.
+    
+    :param msg: The message received from the publisher containing data for `Pose` and `Twist`.
+    :type msg: vinicius_assignment_2_rt1.msg.node_a_msg
+    """
     global pos_print_x, pos_print_y, vel_print_x, vel_print_y
     
     # Position
@@ -48,6 +72,13 @@ def clbk_function(msg):
     vel_print_y = sum(vel_list_y)/len(vel_list_y)
     
 def desired_pos(goal):
+    """
+    Function used on the simple action server :mod:`/reaching_goal_c`. Sets the
+    desired position of the goal.
+    
+    :param goal: The request object containing the :mod:`target_pose` attribute.
+    :type goal: assignment_2_2022.msg.PlanningAction
+    """
     global act_s
     desired_position_.x = goal.target_pose.pose.position.x
     desired_position_.y = goal.target_pose.pose.position.y
@@ -59,6 +90,11 @@ def desired_pos(goal):
     act_s.set_succeeded(result)
     
 def main():
+    """
+    Main function of the node. Initializes the node and sets up the action server, as well as
+    subscribing to :mod:`/node_a_info` topic. Sets up the frequency in which the information
+    is posted on the console.
+    """
     global act_s
     rospy.init_node('node_c')
     

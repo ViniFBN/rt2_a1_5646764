@@ -15,18 +15,17 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para><verbatim>Callback function for the :mod:`/odom` topic, returning a custom message that contains
-only the position and linear velocity of the robot on :mod:`x` and :mod:`y` directions.
+<para><verbatim>Callback function for the :mod:`/odom` topic subscription, reading from the topic message and 
+returning a custom message that contains the position and linear velocity of the 
+robot on :mod:`x` and :mod:`y` directions.
 
-:param msg: The message received from the publisher.
+:param msg: The message received from the publisher containing data for `Pose` and `Twist`.
 :type msg: nav_msgs.msg.Odometry
-:return: Custom message with position and linear velocity of the robot.
-:rtype: vinicius_assignment_2_rt1.msg.node_a_msg
 </verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" line="33" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" bodystart="33" bodyend="64"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" line="36" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" bodystart="36" bodyend="66"/>
       </memberdef>
       <memberdef kind="function" id="namespacenode__a_1af9e9db5804127b434ec388f5788843af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -36,14 +35,13 @@ only the position and linear velocity of the robot on :mod:`x` and :mod:`y` dire
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para><verbatim>stp_robot ello
-
-I should definitely add more stuff here
+<para><verbatim>Function that publishes a message of type *Twist* with values equal to 0,
+in order to stop the robot, to the topic :mod:`/cmd_vel`.
 </verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" line="65" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" bodystart="65" bodyend="73"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" line="67" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" bodystart="67" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="namespacenode__a_1af94178204c08c6d9e2502abc86b943fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -53,31 +51,40 @@ I should definitely add more stuff here
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para><verbatim>aaa test :mod:`bbb.ex2`
+<para><verbatim>Main function of the node. Initializes the node and sets up publishers and subscribers, 
+as well as communication with action servers while waiting for new goals to be set. 
+
+Checks if the *cancel* command is active, in order to cancel the goal set by the user,
+also checking the new goal parameteres sent to the program.
 </verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" line="74" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" bodystart="74" bodyend="133"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" line="76" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" bodystart="76" bodyend="139"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
 <para><verbatim>A node that implements an action client, allowing the user to set a target :mod:`(x, y)`
-or to cancel it. The node also publishes the robot position and velocity as a custom 
-message :mod:`(x,y, vel_x, vel_z)`, by relying on the values published on the topic :mod:`/odom`.
+or to cancel it. The node also publishes the robot position and velocity :mod:`(x,y, vel_x, vel_z)`
+as a custom message :mod:`/node_a_info`, by relying on the values published on the topic :mod:`/odom`. 
 
 Topics
 ------
 
 Subscribes to:
-  :mod:`/odom`
+  * :mod:`/odom`
 
 Publishes to:
-  :mod:`/cmd_vel`
+  * :mod:`/cmd_vel`
+  * :mod:`/node_a_info`
   
-  :mod:`/node_a_info`</verbatim> </para>
+Goal actions:
+  * :mod:`/reaching_goal_bug`
+  * :mod:`/reaching_goal_point`
+  * :mod:`/reaching_goal_c`
+</verbatim> </para>
     </detaileddescription>
     <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_a.py" line="1" column="1"/>
   </compounddef>

@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="16" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="16" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="32" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespacenode__c_1a74e7d6310938535178333487fb2b09c4" prot="public" static="no" mutable="no">
         <type>list</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="17" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="17" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="33" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespacenode__c_1ad213ec39ab1336b1190b34da6db163fb" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="19" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="19" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="35" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespacenode__c_1a9a09ee27e7c3f1b7d868e6f2adb7f740" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="20" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="20" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="36" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespacenode__c_1a2a8b53988bd43dca3bf43a654ca416a6" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="21" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="21" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="37" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespacenode__c_1ab5954a987f8666f7e3ba80bc2caedb6b" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="22" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="22" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="38" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespacenode__c_1ab3d407b2efe6f9b8f1f7bff1a6df3320" prot="public" static="no" mutable="no">
         <type></type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="24" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="24" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="40" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespacenode__c_1a83e7a99ba9cb72aa3779e9830c649b13" prot="public" static="no" mutable="no">
         <type></type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="25" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="25" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="41" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="41" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -128,10 +128,17 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para><verbatim>Callback function for the :mod:`/node_a_info` topic subscription, reading the published
+information on position and velocity and calculating the distance to goal and
+average velocity, on both directions :mod:`x` and :mod:`y`.
+
+:param msg: The message received from the publisher containing data for `Pose` and `Twist`.
+:type msg: vinicius_assignment_2_rt1.msg.node_a_msg
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="27" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="27" bodyend="49"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="43" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="43" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="namespacenode__c_1a067f3c073f81315b1c4e2a61b86c03db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -145,10 +152,16 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para><verbatim>Function used on the simple action server :mod:`/reaching_goal_c`. Sets the
+desired position of the goal.
+
+:param goal: The request object containing the :mod:`target_pose` attribute.
+:type goal: assignment_2_2022.msg.PlanningAction
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="50" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="50" bodyend="60"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="74" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="74" bodyend="91"/>
       </memberdef>
       <memberdef kind="function" id="namespacenode__c_1ad3450df4bc49ad8a33452932c8085296" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -158,15 +171,33 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para><verbatim>Main function of the node. Initializes the node and sets up the action server, as well as
+subscribing to :mod:`/node_a_info` topic. Sets up the frequency in which the information
+is posted on the console.
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="61" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="61" bodyend="79"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="92" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" bodystart="92" bodyend="115"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
+<para><verbatim>A node that subscribes to the robot&apos;s position and velocity (using the custom message from :mod:`/node_a_info`)
+and prints the distance of the robot from the target and the robot&apos;s average speed.
+
+The node uses a parameter :mod:`des_rate_c` to set how fast it publishes the information.
+
+Topics
+------
+
+Subscribes to:
+  * :mod:`/node_a_info`
+  
+Goal actions:
+  * :mod:`/reaching_goal_c`
+</verbatim> </para>
     </detaileddescription>
     <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_c.py" line="1" column="1"/>
   </compounddef>

@@ -72,6 +72,22 @@
   <h1>Source code for node_c</h1><div class="highlight"><pre>
 <span></span><span class="ch">#! /usr/bin/env python3</span>
 
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A node that subscribes to the robot&#39;s position and velocity (using the custom message from :mod:`/node_a_info`)</span>
+<span class="sd">and prints the distance of the robot from the target and the robot&#39;s average speed.</span>
+
+<span class="sd">The node uses a parameter :mod:`des_rate_c` to set how fast it publishes the information.</span>
+
+<span class="sd">Topics</span>
+<span class="sd">------</span>
+
+<span class="sd">Subscribes to:</span>
+<span class="sd">  * :mod:`/node_a_info`</span>
+<span class="sd">  </span>
+<span class="sd">Goal actions:</span>
+<span class="sd">  * :mod:`/reaching_goal_c`</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">rospy</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">actionlib</span>
@@ -96,7 +112,15 @@
 <span class="n">desired_position_</span> <span class="o">=</span> <span class="n">Point</span><span class="p">()</span>
 <span class="n">desired_position_</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="clbk_function"><a class="viewcode-back" href="../node_c.html#node_c.clbk_function">[docs]</a><span class="k">def</span> <span class="nf">clbk_function</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>    
+<div class="viewcode-block" id="clbk_function"><a class="viewcode-back" href="../node_c.html#node_c.clbk_function">[docs]</a><span class="k">def</span> <span class="nf">clbk_function</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Callback function for the :mod:`/node_a_info` topic subscription, reading the published</span>
+<span class="sd">    information on position and velocity and calculating the distance to goal and</span>
+<span class="sd">    average velocity, on both directions :mod:`x` and :mod:`y`.</span>
+<span class="sd">    </span>
+<span class="sd">    :param msg: The message received from the publisher containing data for `Pose` and `Twist`.</span>
+<span class="sd">    :type msg: vinicius_assignment_2_rt1.msg.node_a_msg</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">pos_print_x</span><span class="p">,</span> <span class="n">pos_print_y</span><span class="p">,</span> <span class="n">vel_print_x</span><span class="p">,</span> <span class="n">vel_print_y</span>
     
     <span class="c1"># Position</span>
@@ -120,6 +144,13 @@
     <span class="n">vel_print_y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">vel_list_y</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">vel_list_y</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="desired_pos"><a class="viewcode-back" href="../node_c.html#node_c.desired_pos">[docs]</a><span class="k">def</span> <span class="nf">desired_pos</span><span class="p">(</span><span class="n">goal</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function used on the simple action server :mod:`/reaching_goal_c`. Sets the</span>
+<span class="sd">    desired position of the goal.</span>
+<span class="sd">    </span>
+<span class="sd">    :param goal: The request object containing the :mod:`target_pose` attribute.</span>
+<span class="sd">    :type goal: assignment_2_2022.msg.PlanningAction</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">act_s</span>
     <span class="n">desired_position_</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">goal</span><span class="o">.</span><span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span>
     <span class="n">desired_position_</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">goal</span><span class="o">.</span><span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span>
@@ -131,6 +162,11 @@
     <span class="n">act_s</span><span class="o">.</span><span class="n">set_succeeded</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../node_c.html#node_c.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function of the node. Initializes the node and sets up the action server, as well as</span>
+<span class="sd">    subscribing to :mod:`/node_a_info` topic. Sets up the frequency in which the information</span>
+<span class="sd">    is posted on the console.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">act_s</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;node_c&#39;</span><span class="p">)</span>
     

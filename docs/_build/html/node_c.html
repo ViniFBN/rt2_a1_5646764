@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="node_a.html">node_a Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="node_b.html">node_b Module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">node_c Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#topics">Topics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#node_c.clbk_function"><code class="docutils literal notranslate"><span class="pre">clbk_function()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#node_c.desired_pos"><code class="docutils literal notranslate"><span class="pre">desired_pos()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#node_c.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
@@ -78,20 +79,54 @@
              
   <section id="module-node_c">
 <span id="node-c-module"></span><h1>node_c Module<a class="headerlink" href="#module-node_c" title="Permalink to this heading"></a></h1>
+<p>A node that subscribes to the robot’s position and velocity (using the custom message from <code class="xref py py-mod docutils literal notranslate"><span class="pre">/node_a_info</span></code>)
+and prints the distance of the robot from the target and the robot’s average speed.</p>
+<p>The node uses a parameter <code class="xref py py-mod docutils literal notranslate"><span class="pre">des_rate_c</span></code> to set how fast it publishes the information.</p>
+<section id="topics">
+<h2>Topics<a class="headerlink" href="#topics" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>Subscribes to:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/node_a_info</span></code></p></li>
+</ul>
+</dd>
+<dt>Goal actions:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">/reaching_goal_c</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="node_c.clbk_function">
 <span class="sig-prename descclassname"><span class="pre">node_c.</span></span><span class="sig-name descname"><span class="pre">clbk_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/node_c.html#clbk_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#node_c.clbk_function" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Callback function for the <code class="xref py py-mod docutils literal notranslate"><span class="pre">/node_a_info</span></code> topic subscription, reading the published
+information on position and velocity and calculating the distance to goal and
+average velocity, on both directions <code class="xref py py-mod docutils literal notranslate"><span class="pre">x</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msg</strong> (<em>vinicius_assignment_2_rt1.msg.node_a_msg</em>) – The message received from the publisher containing data for <cite>Pose</cite> and <cite>Twist</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="node_c.desired_pos">
 <span class="sig-prename descclassname"><span class="pre">node_c.</span></span><span class="sig-name descname"><span class="pre">desired_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/node_c.html#desired_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#node_c.desired_pos" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Function used on the simple action server <code class="xref py py-mod docutils literal notranslate"><span class="pre">/reaching_goal_c</span></code>. Sets the
+desired position of the goal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>goal</strong> (<em>assignment_2_2022.msg.PlanningAction</em>) – The request object containing the <code class="xref py py-mod docutils literal notranslate"><span class="pre">target_pose</span></code> attribute.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="node_c.main">
 <span class="sig-prename descclassname"><span class="pre">node_c.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/node_c.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#node_c.main" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Main function of the node. Initializes the node and sets up the action server, as well as
+subscribing to <code class="xref py py-mod docutils literal notranslate"><span class="pre">/node_a_info</span></code> topic. Sets up the frequency in which the information
+is posted on the console.</p>
+</dd></dl>
 
 </section>
 

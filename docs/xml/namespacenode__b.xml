@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" line="18" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" bodystart="18" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" line="22" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespacenode__b_1a9f327f7490f81b03b3a60fd3447950e1" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" line="19" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" bodystart="19" bodyend="-1"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" line="23" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" bodystart="23" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -45,18 +45,19 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para><verbatim>_summary_
+<para><verbatim>Callback function for the service :mod:`node_b_service`, which is responsible 
+for updating and returning the statistics of goals reached and cancelled based 
+on the input :mod:`request` object. Returns a feedback :mod:`response`.
 
-Args:
-    request (_type_): _description_
-
-Returns:
-    _type_: _description_
+:param request: The request object containing the :mod:`stat` attribute.
+:type request: node_b_srvRequest
+:return: A :mod:`node_b_srvResponse` object with the updated goal and/or cancel count.
+:rtype: node_b_srvResponse
 </verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" line="21" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" bodystart="21" bodyend="46"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" line="25" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" bodystart="25" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="namespacenode__b_1a3a7f28e08394200cce6ef8c8944285eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>def</type>
@@ -66,18 +67,27 @@ Returns:
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para><verbatim>Main function of the node. Initializes the node and sets up the service to print information
+on the console whenever a goal is achieved/cancelled.
+</verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" line="47" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" bodystart="47" bodyend="54"/>
+        <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" line="53" column="1" bodyfile="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" bodystart="53" bodyend="64"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para><verbatim>aaa
+<para><verbatim>A service node that, when called, prints the number of goals reached and/or cancelled.
 
-_extended_summary_</verbatim> </para>
+Topics
+------
+
+Services:
+  * :mod:`node_b_service`
+</verbatim> <linebreak/>
+ </para>
     </detaileddescription>
     <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py" line="1" column="1"/>
   </compounddef>

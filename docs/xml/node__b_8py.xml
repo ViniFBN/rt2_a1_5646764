@@ -10,60 +10,70 @@
     <programlisting>
 <codeline lineno="1" refid="namespacenode__b" refkind="compound"><highlight class="comment">#!<sp/>/usr/bin/env<sp/>python3</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="3"><highlight class="normal"></highlight><highlight class="stringliteral">&quot;&quot;&quot;<sp/>aaa</highlight></codeline>
-<codeline lineno="4"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="5"><highlight class="stringliteral">_extended_summary_</highlight></codeline>
-<codeline lineno="6"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="7"><highlight class="stringliteral">&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>rospy</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib.msg</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>vinicius_assignment_2_rt1.srv<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>node_b_srv,<sp/>node_b_srvResponse,<sp/>node_b_srvRequest</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>geometry_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Point,<sp/>Pose,<sp/>Twist</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>nav_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Odometry</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>tf<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>transformations</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/><ref refid="namespacestd__srvs_1_1srv" kindref="compound">std_srvs.srv</ref><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>*</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal">i_goal<sp/>=<sp/>0</highlight></codeline>
-<codeline lineno="19"><highlight class="normal">i_cancel<sp/>=<sp/>0</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__b_1a64163f9a980564dddf12af72608aec8d" kindref="member">clbk_srv</ref>(request):</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;_summary_</highlight></codeline>
-<codeline lineno="23"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="24"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Args:</highlight></codeline>
-<codeline lineno="25"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>request<sp/>(_type_):<sp/>_description_</highlight></codeline>
-<codeline lineno="26"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="27"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Returns:</highlight></codeline>
-<codeline lineno="28"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_type_:<sp/>_description_</highlight></codeline>
-<codeline lineno="29"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>req_var_stat</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>i_goal,<sp/>i_cancel<sp/></highlight><highlight class="comment">#<sp/>Variable<sp/>to<sp/>count<sp/>the<sp/>number<sp/>of<sp/>responses<sp/>obtained</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>req_var_stat<sp/>=<sp/>request.stat</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>response<sp/>=<sp/>node_b_srvResponse()</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>req_var_stat<sp/>==<sp/></highlight><highlight class="keyword">True</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>i_goal<sp/>=<sp/>i_goal<sp/>+<sp/>1</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>response.goal_num<sp/>=<sp/>i_goal</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;Number<sp/>of<sp/>goals<sp/>reached:&quot;</highlight><highlight class="normal">,response.goal_num)</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">elif</highlight><highlight class="normal"><sp/>req_var_stat<sp/>==<sp/></highlight><highlight class="keyword">False</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>i_cancel<sp/>=<sp/>i_cancel<sp/>+<sp/>1</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>response.cancel_num<sp/>=<sp/>i_cancel</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;Number<sp/>of<sp/>goals<sp/>cancelled:&quot;</highlight><highlight class="normal">,response.cancel_num)</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>response<sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__b_1a3a7f28e08394200cce6ef8c8944285eb" kindref="member">main</ref>():</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>serv</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.init_node(</highlight><highlight class="stringliteral">&apos;node_b&apos;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;=====<sp/>Node<sp/>B<sp/>-<sp/>Service<sp/>to<sp/>show<sp/>how<sp/>many<sp/>goals<sp/>were<sp/>reached/cancelled<sp/>=====\n&quot;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>serv<sp/>=<sp/>rospy.Service(</highlight><highlight class="stringliteral">&apos;node_b_service&apos;</highlight><highlight class="normal">,<sp/>node_b_srv,<sp/>clbk_srv)</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.spin()</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>__name__<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;__main__&quot;</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacenode__b_1a3a7f28e08394200cce6ef8c8944285eb" kindref="member">main</ref>()</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="stringliteral">&quot;&quot;&quot;<sp/></highlight></codeline>
+<codeline lineno="4"><highlight class="stringliteral">A<sp/>service<sp/>node<sp/>that,<sp/>when<sp/>called,<sp/>prints<sp/>the<sp/>number<sp/>of<sp/>goals<sp/>reached<sp/>and/or<sp/>cancelled.</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral">Topics</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral">------</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral">Services:</highlight></codeline>
+<codeline lineno="10"><highlight class="stringliteral"><sp/><sp/>*<sp/>:mod:`node_b_service`</highlight></codeline>
+<codeline lineno="11"><highlight class="stringliteral">&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>rospy</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>actionlib.msg</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>vinicius_assignment_2_rt1.srv<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>node_b_srv,<sp/>node_b_srvResponse,<sp/>node_b_srvRequest</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>geometry_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Point,<sp/>Pose,<sp/>Twist</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>nav_msgs.msg<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Odometry</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>tf<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>transformations</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/><ref refid="namespacestd__srvs_1_1srv" kindref="compound">std_srvs.srv</ref><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>*</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal">i_goal<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">i_cancel<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__b_1a64163f9a980564dddf12af72608aec8d" kindref="member">clbk_srv</ref>(request):</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="27"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Callback<sp/>function<sp/>for<sp/>the<sp/>service<sp/>:mod:`node_b_service`,<sp/>which<sp/>is<sp/>responsible<sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>for<sp/>updating<sp/>and<sp/>returning<sp/>the<sp/>statistics<sp/>of<sp/>goals<sp/>reached<sp/>and<sp/>cancelled<sp/>based<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>on<sp/>the<sp/>input<sp/>:mod:`request`<sp/>object.<sp/>Returns<sp/>a<sp/>feedback<sp/>:mod:`response`.</highlight></codeline>
+<codeline lineno="30"><highlight class="stringliteral"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:param<sp/>request:<sp/>The<sp/>request<sp/>object<sp/>containing<sp/>the<sp/>:mod:`stat`<sp/>attribute.</highlight></codeline>
+<codeline lineno="32"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:type<sp/>request:<sp/>node_b_srvRequest</highlight></codeline>
+<codeline lineno="33"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:return:<sp/>A<sp/>:mod:`node_b_srvResponse`<sp/>object<sp/>with<sp/>the<sp/>updated<sp/>goal<sp/>and/or<sp/>cancel<sp/>count.</highlight></codeline>
+<codeline lineno="34"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>:rtype:<sp/>node_b_srvResponse</highlight></codeline>
+<codeline lineno="35"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>req_var_stat</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>i_goal,<sp/>i_cancel<sp/></highlight><highlight class="comment">#<sp/>Variable<sp/>to<sp/>count<sp/>the<sp/>number<sp/>of<sp/>responses<sp/>obtained</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>req_var_stat<sp/>=<sp/>request.stat</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>response<sp/>=<sp/>node_b_srvResponse()</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>req_var_stat<sp/>==<sp/></highlight><highlight class="keyword">True</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>i_goal<sp/>=<sp/>i_goal<sp/>+<sp/>1</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>response.goal_num<sp/>=<sp/>i_goal</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;Number<sp/>of<sp/>goals<sp/>reached:&quot;</highlight><highlight class="normal">,response.goal_num)</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">elif</highlight><highlight class="normal"><sp/>req_var_stat<sp/>==<sp/></highlight><highlight class="keyword">False</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>i_cancel<sp/>=<sp/>i_cancel<sp/>+<sp/>1</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>response.cancel_num<sp/>=<sp/>i_cancel</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;Number<sp/>of<sp/>goals<sp/>cancelled:&quot;</highlight><highlight class="normal">,response.cancel_num)</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>response<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="namespacenode__b_1a3a7f28e08394200cce6ef8c8944285eb" kindref="member">main</ref>():</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="55"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Main<sp/>function<sp/>of<sp/>the<sp/>node.<sp/>Initializes<sp/>the<sp/>node<sp/>and<sp/>sets<sp/>up<sp/>the<sp/>service<sp/>to<sp/>print<sp/>information</highlight></codeline>
+<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>on<sp/>the<sp/>console<sp/>whenever<sp/>a<sp/>goal<sp/>is<sp/>achieved/cancelled.</highlight></codeline>
+<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">global</highlight><highlight class="normal"><sp/>serv</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.init_node(</highlight><highlight class="stringliteral">&apos;node_b&apos;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;=====<sp/>Node<sp/>B<sp/>-<sp/>Service<sp/>to<sp/>show<sp/>how<sp/>many<sp/>goals<sp/>were<sp/>reached/cancelled<sp/>=====\n&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>serv<sp/>=<sp/>rospy.Service(</highlight><highlight class="stringliteral">&apos;node_b_service&apos;</highlight><highlight class="normal">,<sp/>node_b_srv,<sp/>clbk_srv)</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>rospy.spin()</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>__name__<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;__main__&quot;</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacenode__b_1a3a7f28e08394200cce6ef8c8944285eb" kindref="member">main</ref>()</highlight></codeline>
     </programlisting>
     <location file="/mnt/c/Users/vinim/Desktop/JEMARO/M1/Semester_1/Research_track_1/Assignment_2/src/vinicius_assignment_2_rt1/scripts/node_b.py"/>
   </compounddef>

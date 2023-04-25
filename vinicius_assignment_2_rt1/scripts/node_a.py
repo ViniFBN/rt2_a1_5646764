@@ -2,20 +2,23 @@
 
 """
 A node that implements an action client, allowing the user to set a target :mod:`(x, y)`
-or to cancel it. The node also publishes the robot position and velocity as a custom 
-message :mod:`(x,y, vel_x, vel_z)`, by relying on the values published on the topic :mod:`/odom`.
+or to cancel it. The node also publishes the robot position and velocity :mod:`(x,y, vel_x, vel_z)`
+as a custom message :mod:`/node_a_info`, by relying on the values published on the topic :mod:`/odom`. 
 
 Topics
 ------
 
 Subscribes to:
-  :mod:`/odom`
+  * :mod:`/odom`
 
 Publishes to:
-  :mod:`/cmd_vel`
+  * :mod:`/cmd_vel`
+  * :mod:`/node_a_info`
   
-  :mod:`/node_a_info`
-  
+Goal actions:
+  * :mod:`/reaching_goal_bug`
+  * :mod:`/reaching_goal_point`
+  * :mod:`/reaching_goal_c`
 """
 
 import rospy
@@ -32,13 +35,12 @@ import time
 
 def clbk_odom(msg):
     """
-    Callback function for the :mod:`/odom` topic, returning a custom message that contains
-    only the position and linear velocity of the robot on :mod:`x` and :mod:`y` directions.
+    Callback function for the :mod:`/odom` topic subscription, reading from the topic message and 
+    returning a custom message that contains the position and linear velocity of the 
+    robot on :mod:`x` and :mod:`y` directions.
 
-    :param msg: The message received from the publisher.
+    :param msg: The message received from the publisher containing data for `Pose` and `Twist`.
     :type msg: nav_msgs.msg.Odometry
-    :return: Custom message with position and linear velocity of the robot.
-    :rtype: vinicius_assignment_2_rt1.msg.node_a_msg
     """
     global position_, yaw_, pose_
 
@@ -63,9 +65,9 @@ def clbk_odom(msg):
     pub.publish(msg_custom)
     
 def stp_robot():
-    """stp_robot ello
-
-    I should definitely add more stuff here
+    """
+    Function that publishes a message of type *Twist* with values equal to 0,
+    in order to stop the robot, to the topic :mod:`/cmd_vel`.
     """
     twist_msg.linear.x = 0
     twist_msg.angular.z = 0
@@ -73,7 +75,11 @@ def stp_robot():
 
 def main():
     """
-    aaa test :mod:`bbb.ex2`
+    Main function of the node. Initializes the node and sets up publishers and subscribers, 
+    as well as communication with action servers while waiting for new goals to be set. 
+    
+    Checks if the *cancel* command is active, in order to cancel the goal set by the user,
+    also checking the new goal parameteres sent to the program.
     """
     global pub, pub_twist, twist_msg
     

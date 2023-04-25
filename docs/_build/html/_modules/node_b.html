@@ -72,10 +72,14 @@
   <h1>Source code for node_b</h1><div class="highlight"><pre>
 <span></span><span class="ch">#! /usr/bin/env python3</span>
 <span class="w">    </span>
-<span class="sd">&quot;&quot;&quot; aaa</span>
+<span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">A service node that, when called, prints the number of goals reached and/or cancelled.</span>
 
-<span class="sd">_extended_summary_</span>
+<span class="sd">Topics</span>
+<span class="sd">------</span>
 
+<span class="sd">Services:</span>
+<span class="sd">  * :mod:`node_b_service`</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">rospy</span>
@@ -91,13 +95,15 @@
 <span class="n">i_cancel</span> <span class="o">=</span> <span class="mi">0</span>
 
 <div class="viewcode-block" id="clbk_srv"><a class="viewcode-back" href="../node_b.html#node_b.clbk_srv">[docs]</a><span class="k">def</span> <span class="nf">clbk_srv</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;_summary_</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        request (_type_): _description_</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        _type_: _description_</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Callback function for the service :mod:`node_b_service`, which is responsible </span>
+<span class="sd">    for updating and returning the statistics of goals reached and cancelled based </span>
+<span class="sd">    on the input :mod:`request` object. Returns a feedback :mod:`response`.</span>
+<span class="sd">    </span>
+<span class="sd">    :param request: The request object containing the :mod:`stat` attribute.</span>
+<span class="sd">    :type request: node_b_srvRequest</span>
+<span class="sd">    :return: A :mod:`node_b_srvResponse` object with the updated goal and/or cancel count.</span>
+<span class="sd">    :rtype: node_b_srvResponse</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">req_var_stat</span>
     <span class="k">global</span> <span class="n">i_goal</span><span class="p">,</span> <span class="n">i_cancel</span> <span class="c1"># Variable to count the number of responses obtained</span>
@@ -117,6 +123,10 @@
     
 
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../node_b.html#node_b.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function of the node. Initializes the node and sets up the service to print information</span>
+<span class="sd">    on the console whenever a goal is achieved/cancelled.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">serv</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;node_b&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===== Node B - Service to show how many goals were reached/cancelled =====</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>

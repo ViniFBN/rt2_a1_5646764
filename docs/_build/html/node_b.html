@@ -45,6 +45,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="node_a.html">node_a Module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">node_b Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#topics">Topics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#node_b.clbk_srv"><code class="docutils literal notranslate"><span class="pre">clbk_srv()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#node_b.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
@@ -78,21 +79,31 @@
              
   <section id="module-node_b">
 <span id="node-b-module"></span><h1>node_b Module<a class="headerlink" href="#module-node_b" title="Permalink to this heading"></a></h1>
-<p>aaa</p>
-<p>_extended_summary_</p>
+<p>A service node that, when called, prints the number of goals reached and/or cancelled.</p>
+<section id="topics">
+<h2>Topics<a class="headerlink" href="#topics" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>Services:</dt><dd><ul class="simple">
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">node_b_service</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="node_b.clbk_srv">
 <span class="sig-prename descclassname"><span class="pre">node_b.</span></span><span class="sig-name descname"><span class="pre">clbk_srv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/node_b.html#clbk_srv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#node_b.clbk_srv" title="Permalink to this definition"></a></dt>
-<dd><p>_summary_</p>
+<dd><p>Callback function for the service <code class="xref py py-mod docutils literal notranslate"><span class="pre">node_b_service</span></code>, which is responsible
+for updating and returning the statistics of goals reached and cancelled based
+on the input <code class="xref py py-mod docutils literal notranslate"><span class="pre">request</span></code> object. Returns a feedback <code class="xref py py-mod docutils literal notranslate"><span class="pre">response</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> (<em>_type_</em>) – _description_</p>
+<dd class="field-odd"><p><strong>request</strong> (<em>node_b_srvRequest</em>) – The request object containing the <a class="reference external" href="https://docs.python.org/3/library/stat.html#module-stat" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">stat</span></code></a> attribute.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>_description_</p>
+<dd class="field-even"><p>A <code class="xref py py-mod docutils literal notranslate"><span class="pre">node_b_srvResponse</span></code> object with the updated goal and/or cancel count.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>_type_</p>
+<dd class="field-odd"><p>node_b_srvResponse</p>
 </dd>
 </dl>
 </dd></dl>
@@ -100,7 +111,9 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="node_b.main">
 <span class="sig-prename descclassname"><span class="pre">node_b.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/node_b.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#node_b.main" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Main function of the node. Initializes the node and sets up the service to print information
+on the console whenever a goal is achieved/cancelled.</p>
+</dd></dl>
 
 </section>
 
