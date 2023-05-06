@@ -88,7 +88,7 @@ def done():
 def planning(goal):
     global regions_, position_, desired_position_, state_, yaw_, yaw_error_allowed_
     global srv_client_go_to_point_, srv_client_wall_follower_, srv_client_node_b_, act_s, pose_
-    
+
     change_state(0)
     rate = rospy.Rate(20)
     success = True
@@ -164,7 +164,7 @@ def planning(goal):
 def main():
     global regions_, position_, desired_position_, state_, yaw_, yaw_error_allowed_
     global srv_client_go_to_point_, srv_client_wall_follower_, srv_client_node_b_, act_s, pub
-
+    
     rospy.init_node('bug_action_service') # Initializing the node
 
     # Subscribing to the laser scanner and odometry messages
